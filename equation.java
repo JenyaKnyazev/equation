@@ -1,12 +1,17 @@
 
 public class equation {
 	public static double assign(String s,int x) {
-		String [] toCalc = split(s,x);
-		if(isPosibleCalc(toCalc))
-			return calc(Double.parseDouble(toCalc[0]),toCalc[1],Double.parseDouble(toCalc[2]));
-		else if(toCalc[1]==null)
-			return Double.parseDouble(toCalc[0]);
-		return calc(assign(toCalc[0],x),toCalc[1],assign(toCalc[2],x));
+		try {
+			String [] toCalc = split(s,x);
+			if(isPosibleCalc(toCalc))
+				return calc(Double.parseDouble(toCalc[0]),toCalc[1],Double.parseDouble(toCalc[2]));
+			else if(toCalc[1]==null)
+				return Double.parseDouble(toCalc[0]);
+			return calc(assign(toCalc[0],x),toCalc[1],assign(toCalc[2],x));
+		}catch(Exception e) {
+			return Double.NaN;
+		}
+		
 	}
 	public static double calc(double a,String  oper,double b) {
 		double result = Double.NaN;
@@ -113,7 +118,7 @@ public class equation {
 	public static void main(String[] args) {
 		System.out.println("5*2+4/2-7*3 = "+assign("5*2+4/2-7*3", 5));
 		System.out.println("((2+2)*(5-3)) = "+assign("((2+2)*(5-3))", 5));
-		System.out.println("(5+(3+x)*(4-5)) = "+assign("(5+(3+x)*(4-5))", 2));
+		System.out.println("X = 2 |(5+(3+x)*(4-5)) = "+assign("(5+(3+x)*(4-5))", 2));
 		System.out.println("(((5+2)*(3-4))+7/2)*4 = "+assign("(((5+2)*(3-4))+7/2)*4", 2));
 	}
 
